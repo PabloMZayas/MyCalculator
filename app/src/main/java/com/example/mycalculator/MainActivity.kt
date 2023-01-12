@@ -71,24 +71,17 @@ class MainActivity : AppCompatActivity() {
 
         while (iterations != 0) {
             if (i == 0) {
-                if (operationsSymbols[i].compareTo('+') == 0) {
-                    result = subsequencesOfOperations[i].toFloat() + subsequencesOfOperations[1].toFloat()
-                }
-
-                if (operationsSymbols[i].compareTo('-') == 0) {
-                    result = subsequencesOfOperations[i].toFloat() - subsequencesOfOperations[1].toFloat()
-                    multiplicationAux = -1.0f
-                    multiplicationAux2 = -1.0f
-                }
-
-                if (operationsSymbols[i].compareTo('x') == 0) {
-                    multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[1].toFloat()
-                    result = multiplicationAux
-                    multiplicationAux2 = multiplicationAux
-                }
-
-                if (operationsSymbols[i].compareTo('/') == 0) {
-                    result = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[1].toFloat()
+                when (operationsSymbols[i]){
+                    '+' -> result = subsequencesOfOperations[i].toFloat() + subsequencesOfOperations[1].toFloat()
+                    '-' -> result = subsequencesOfOperations[i].toFloat() - subsequencesOfOperations[1].toFloat()
+                    'x' -> {
+                        multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[1].toFloat()
+                        result = multiplicationAux
+                        multiplicationAux2 = multiplicationAux
+                    }
+                    '/' -> {
+                        result = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[1].toFloat()
+                    }
                 }
 
             } else {
@@ -105,19 +98,30 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (operationsSymbols[i].compareTo('x') == 0) {
-                    if(operationsSymbols[i-1].compareTo('x') != 0) {
-                        multiplicationAux =
-                            subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
-                        result += multiplicationAux
-                        multiplicationAux2 = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
-                        multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
-                    }
-                    else{
-                        multiplicationAux *= subsequencesOfOperations[i + 1].toFloat()
-                        result = result + multiplicationAux - multiplicationAux2
-                        multiplicationAux2 = multiplicationAux
-                        //multiplicationAux = result
-                    }
+                        when(operationsSymbols[i-1]){
+                            '+' -> {
+                                multiplicationAux =
+                                    subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                                result += multiplicationAux
+                                multiplicationAux2 = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                                multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                            }
+                            '-' -> {
+                                multiplicationAux =
+                                    subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                                result -= multiplicationAux
+                                multiplicationAux2 = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                                multiplicationAux = -subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                            }
+
+                            '/' -> {}
+
+                            'x' -> {
+                                multiplicationAux *= subsequencesOfOperations[i + 1].toFloat()
+                                result = result + multiplicationAux - multiplicationAux2
+                                multiplicationAux2 = multiplicationAux
+                            }
+                        }
                 }
             }
 
