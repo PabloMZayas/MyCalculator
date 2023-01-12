@@ -11,7 +11,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_et_showOperation"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:text="0"
-            android:textSize="30sp"/>
+            android:textAlignment="textEnd"
+            android:textSize="20sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -30,9 +31,11 @@
     <TextView
         android:id="@+id/tv_showResult"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="90dp"
         android:textSize="30sp"
         android:textColor="#811B1B"
+        android:text="0"
+        android:textAlignment="textEnd"
         android:background="@color/baby_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +64,6 @@
 
                 <Button
                     android:id="@+id/btn_clear"
-                    style="button_filled_pink_white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"

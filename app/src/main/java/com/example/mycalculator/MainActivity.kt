@@ -77,6 +77,8 @@ class MainActivity : AppCompatActivity() {
 
                 if (operationsSymbols[i].compareTo('-') == 0) {
                     result = subsequencesOfOperations[i].toFloat() - subsequencesOfOperations[1].toFloat()
+                    multiplicationAux = -1.0f
+                    multiplicationAux2 = -1.0f
                 }
 
                 if (operationsSymbols[i].compareTo('x') == 0) {
@@ -92,10 +94,14 @@ class MainActivity : AppCompatActivity() {
             } else {
                 if (operationsSymbols[i].compareTo('+') == 0) {
                     result += subsequencesOfOperations[i + 1].toFloat()
+                    multiplicationAux = 1.0f
+                    multiplicationAux2 = 1.0f
                 }
 
                 if (operationsSymbols[i].compareTo('-') == 0) {
                     result -= subsequencesOfOperations[i + 1].toFloat()
+                    multiplicationAux = -1.0f
+                    multiplicationAux2 = -1.0f
                 }
 
                 if (operationsSymbols[i].compareTo('x') == 0) {
@@ -103,10 +109,14 @@ class MainActivity : AppCompatActivity() {
                         multiplicationAux =
                             subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
                         result += multiplicationAux
+                        multiplicationAux2 = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                        multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
                     }
                     else{
                         multiplicationAux *= subsequencesOfOperations[i + 1].toFloat()
-                        result = multiplicationAux
+                        result = result + multiplicationAux - multiplicationAux2
+                        multiplicationAux2 = multiplicationAux
+                        //multiplicationAux = result
                     }
                 }
             }
@@ -114,6 +124,8 @@ class MainActivity : AppCompatActivity() {
             i++
             iterations--
         }
+        Toast.makeText(this, "aux1 = $multiplicationAux", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "aux2 = $multiplicationAux2", Toast.LENGTH_SHORT).show()
         binding.tvShowResult.text = result.toString()
     }
 
