@@ -3,7 +3,8 @@ package com.example.mycalculator
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import com.example.mycalculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -194,7 +195,12 @@ class MainActivity : AppCompatActivity() {
             i++
             iterations--
         }
-        binding.tvShowResult.text = result.toString()
+
+
+        val decimalFormat = DecimalFormat("#.####")
+        decimalFormat.roundingMode = RoundingMode.DOWN
+        val roundOff = decimalFormat.format(result)
+        binding.tvShowResult.text = roundOff.toString()
     }
 
 
