@@ -33,10 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:textSize="30sp"
-        android:textColor="#811B1B"
         android:text="0"
         android:textAlignment="textEnd"
-        android:background="@color/baby_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_et_showOperation" />
@@ -388,7 +386,6 @@
 
                 <Button
                     android:id="@+id/btn_erase"
-                    style="button_filled_pink_white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"
