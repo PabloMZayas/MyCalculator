@@ -1,5 +1,6 @@
 package com.example.mycalculator
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         var auxNumberOfOperations = 0
 
         for ((index, value) in operation.withIndex()) {
-            if (!value.isDigit()) {
+            if (!value.isDigit() && value != '.') {
                 numberOfOperations++
                 auxNumberOfOperations++
                 indices.add(index)
@@ -68,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         var i = 0
         var multiplicationAux = 1.0f
         var multiplicationAux2 = 1.0f
+        var divisionAux = 1.0f
+        var divisionAux2 = 1.0f
 
         while (iterations != 0) {
             if (i == 0) {
@@ -78,9 +81,17 @@ class MainActivity : AppCompatActivity() {
                         multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[1].toFloat()
                         result = multiplicationAux
                         multiplicationAux2 = multiplicationAux
+
+                        divisionAux = multiplicationAux
+                        divisionAux2 = multiplicationAux2
                     }
                     '/' -> {
-                        result = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[1].toFloat()
+                        divisionAux = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[1].toFloat()
+                        result = divisionAux
+                        divisionAux2 = divisionAux
+
+                        multiplicationAux = divisionAux
+                        multiplicationAux2 = divisionAux2
                     }
                 }
 
@@ -89,12 +100,16 @@ class MainActivity : AppCompatActivity() {
                     result += subsequencesOfOperations[i + 1].toFloat()
                     multiplicationAux = 1.0f
                     multiplicationAux2 = 1.0f
+                    divisionAux = 1.0f
+                    divisionAux2 = 1.0f
                 }
 
                 if (operationsSymbols[i].compareTo('-') == 0) {
                     result -= subsequencesOfOperations[i + 1].toFloat()
                     multiplicationAux = -1.0f
                     multiplicationAux2 = -1.0f
+                    divisionAux = -1.0f
+                    divisionAux2 = -1.0f
                 }
 
                 if (operationsSymbols[i].compareTo('x') == 0) {
@@ -110,30 +125,80 @@ class MainActivity : AppCompatActivity() {
                                 multiplicationAux =
                                     subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
                                 result -= multiplicationAux
-                                multiplicationAux2 = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                                multiplicationAux2 = -subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
                                 multiplicationAux = -subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
                             }
 
-                            '/' -> {}
+                            '/' -> {
+                                divisionAux *= subsequencesOfOperations[i + 1].toFloat()
+                                result = result + divisionAux - divisionAux2
+                                divisionAux2 = divisionAux
+
+
+                                multiplicationAux = divisionAux
+                                multiplicationAux2 = divisionAux2
+                            }
 
                             'x' -> {
                                 multiplicationAux *= subsequencesOfOperations[i + 1].toFloat()
                                 result = result + multiplicationAux - multiplicationAux2
                                 multiplicationAux2 = multiplicationAux
+
+
+                                divisionAux = multiplicationAux
+                                divisionAux2 = multiplicationAux2
                             }
                         }
+                }
+
+                if (operationsSymbols[i].compareTo('/') == 0) {
+                    when(operationsSymbols[i-1]){
+                        '+' -> {
+                            divisionAux =
+                                subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                            result += divisionAux
+                            divisionAux2 = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+                            divisionAux = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+                        }
+                        '-' -> {
+                            divisionAux =
+                                subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                            result -= divisionAux
+                            divisionAux2 = -subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+                            divisionAux = -subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+                        }
+
+                        '/' -> {
+                            divisionAux /= subsequencesOfOperations[i + 1].toFloat()
+                            result = result + divisionAux - divisionAux2
+                            divisionAux2 = divisionAux
+
+
+                            multiplicationAux = divisionAux
+                            multiplicationAux2 = divisionAux2
+                        }
+
+                        'x' -> {
+                            divisionAux /= subsequencesOfOperations[i + 1].toFloat()
+                            result = result + divisionAux - divisionAux2
+                            divisionAux2 = divisionAux
+
+
+                            multiplicationAux = divisionAux
+                            multiplicationAux2 = divisionAux2
+                        }
+                    }
                 }
             }
 
             i++
             iterations--
         }
-        Toast.makeText(this, "aux1 = $multiplicationAux", Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, "aux2 = $multiplicationAux2", Toast.LENGTH_SHORT).show()
         binding.tvShowResult.text = result.toString()
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun showOperation() {
         var operation = ""
         with(binding) {
@@ -209,6 +274,16 @@ class MainActivity : AppCompatActivity() {
                 editTextShowOperation.setText(operation)
             }
 
+            btnPoint.setOnClickListener {
+                operation += "."
+                editTextShowOperation.setText(operation)
+            }
+
+            btnPi.setOnClickListener {
+                editTextShowOperation.setText(operation + "π")
+                operation += "3.141592653589793"
+            }
+
             btnClear.setOnClickListener {
                 editTextShowOperation.setText("")
                 tvShowResult.text = ""
@@ -216,7 +291,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnErase.setOnClickListener {
-                var auxOperation: String
+                val auxOperation: String
                 if (operation.isNotEmpty()) {
                     auxOperation = operation.subSequence(0, operation.lastIndex).toString()
                     operation = auxOperation
