@@ -32,8 +32,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if(numberOfOperations == 0 && operation.isNotEmpty())
+        if(numberOfOperations == 0 && operation.isNotEmpty()){
             subsequencesOfOperations.add(operation)
+        }
+
 
         if (numberOfOperations != 0) {
 
@@ -72,6 +74,9 @@ class MainActivity : AppCompatActivity() {
         var multiplicationAux2 = 1.0f
         var divisionAux = 1.0f
         var divisionAux2 = 1.0f
+
+        if(iterations == 0)
+            result = subsequencesOfOperations[0].toFloat()
 
         while (iterations != 0) {
             if (i == 0) {
