@@ -121,6 +121,9 @@ class MainActivity : AppCompatActivity() {
                                 result += multiplicationAux
                                 multiplicationAux2 = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
                                 multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+
+                                divisionAux = multiplicationAux
+                                divisionAux2 = multiplicationAux2
                             }
                             '-' -> {
                                 multiplicationAux =
@@ -128,6 +131,9 @@ class MainActivity : AppCompatActivity() {
                                 result -= multiplicationAux
                                 multiplicationAux2 = -subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
                                 multiplicationAux = -subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+
+                                divisionAux = multiplicationAux
+                                divisionAux2 = multiplicationAux2
                             }
 
                             '/' -> {
@@ -160,6 +166,9 @@ class MainActivity : AppCompatActivity() {
                             result += divisionAux
                             divisionAux2 = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
                             divisionAux = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+
+                            multiplicationAux = divisionAux
+                            multiplicationAux2 = divisionAux2
                         }
                         '-' -> {
                             divisionAux =
@@ -167,6 +176,9 @@ class MainActivity : AppCompatActivity() {
                             result -= divisionAux
                             divisionAux2 = -subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
                             divisionAux = -subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+
+                            multiplicationAux = divisionAux
+                            multiplicationAux2 = divisionAux2
                         }
 
                         '/' -> {
