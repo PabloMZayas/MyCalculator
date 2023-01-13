@@ -209,10 +209,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val decimalFormat = DecimalFormat("#.####")
+        val decimalFormat = DecimalFormat("#,###.####")
         decimalFormat.roundingMode = RoundingMode.DOWN
         val roundOff = decimalFormat.format(result)
-        binding.tvShowResult.text = roundOff.toString()
+        binding.tvShowResult.setText(roundOff.toString())
     }
 
 
@@ -304,7 +304,7 @@ class MainActivity : AppCompatActivity() {
 
             btnClear.setOnClickListener {
                 editTextShowOperation.setText("")
-                tvShowResult.text = ""
+                tvShowResult.setText("")
                 operation = ""
             }
 
@@ -315,6 +315,13 @@ class MainActivity : AppCompatActivity() {
                     operation = auxOperation
                     editTextShowOperation.setText(operation)
                 }
+            }
+
+            btnErase.setOnLongClickListener {
+                editTextShowOperation.setText("")
+                tvShowResult.setText("")
+                operation = ""
+                return@setOnLongClickListener true
             }
 
             btnEqual.setOnClickListener {
