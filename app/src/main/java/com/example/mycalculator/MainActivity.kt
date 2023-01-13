@@ -1,6 +1,5 @@
 package com.example.mycalculator
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import java.math.RoundingMode
@@ -221,7 +220,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @SuppressLint("SetTextI18n")
     private fun showOperation() {
         var operation = ""
         with(binding) {
