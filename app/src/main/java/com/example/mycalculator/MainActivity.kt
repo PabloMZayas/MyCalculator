@@ -32,8 +32,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if(numberOfOperations == 0 && operation.isNotEmpty())
+        if(numberOfOperations == 0 && operation.isNotEmpty()){
             subsequencesOfOperations.add(operation)
+        }
+
 
         if (numberOfOperations != 0) {
 
@@ -72,6 +74,9 @@ class MainActivity : AppCompatActivity() {
         var multiplicationAux2 = 1.0f
         var divisionAux = 1.0f
         var divisionAux2 = 1.0f
+
+        if(iterations == 0)
+            result = subsequencesOfOperations[0].toFloat()
 
         while (iterations != 0) {
             if (i == 0) {
@@ -209,10 +214,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val decimalFormat = DecimalFormat("#.####")
+        val decimalFormat = DecimalFormat("#,###.####")
         decimalFormat.roundingMode = RoundingMode.DOWN
         val roundOff = decimalFormat.format(result)
-        binding.tvShowResult.text = roundOff.toString()
+        binding.tvShowResult.setText(roundOff.toString())
     }
 
 
@@ -304,7 +309,7 @@ class MainActivity : AppCompatActivity() {
 
             btnClear.setOnClickListener {
                 editTextShowOperation.setText("")
-                tvShowResult.text = ""
+                tvShowResult.setText("")
                 operation = ""
             }
 
@@ -315,6 +320,13 @@ class MainActivity : AppCompatActivity() {
                     operation = auxOperation
                     editTextShowOperation.setText(operation)
                 }
+            }
+
+            btnErase.setOnLongClickListener {
+                editTextShowOperation.setText("")
+                tvShowResult.setText("")
+                operation = ""
+                return@setOnLongClickListener true
             }
 
             btnEqual.setOnClickListener {

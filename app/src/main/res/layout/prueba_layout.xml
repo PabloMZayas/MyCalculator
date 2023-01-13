@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:text="0"
-            android:clickable="false"
             android:textAlignment="textEnd"
             android:textSize="20sp" />
 
@@ -31,21 +30,19 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_tv_showResult"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_et_showOperation">
 
         <EditText
-            android:id="@+id/tv_showResult"
+            android:id="@+id/tv_showOperation"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:text="0"
-            android:clickable="false"
             android:textAlignment="textEnd"
-            android:textColor="#954444"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
