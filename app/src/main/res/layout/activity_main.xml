@@ -7,13 +7,26 @@
     android:padding="2dp"
     tools:context=".MainActivity">
 
+    <ImageButton
+        android:padding="5dp"
+        android:id="@+id/btn_shrek"
+        android:layout_width="100dp"
+        android:layout_height="110dp"
+        android:background="@drawable/circle_button"
+        android:src="@drawable/patric"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_et_showOperation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/layout_et_showOperation" />
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_et_showOperation"
-        android:layout_width="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_width="0dp"
         android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_shrek"
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
@@ -21,9 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:text="0"
-            android:clickable="false"
             android:textAlignment="textEnd"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="40sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,7 +55,6 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:text="0"
-            android:clickable="false"
             android:textAlignment="textEnd"
             android:textColor="#954444"
             android:textSize="30sp" />

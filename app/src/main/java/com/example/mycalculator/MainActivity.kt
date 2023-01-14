@@ -2,8 +2,11 @@ package com.example.mycalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.mycalculator.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -27,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.calculate.observe(this){ operation ->
-
+            if(operation.length>11)
+                binding.editTextShowOperation.textSize = 25f
             binding.editTextShowOperation.setText(operation)
         }
     }
@@ -105,15 +109,15 @@ class MainActivity : AppCompatActivity() {
                 if (operation.isNotEmpty()) {
                     auxOperation = operation.subSequence(0, operation.lastIndex).toString()
                     operation = auxOperation
-                    //viewModel.modifyOperation(operation)
-                    var lastIndex = operation.lastIndex
+                    val lastIndex = operation.lastIndex
                     for ((index, value) in operation.withIndex()) {
                         if (index == lastIndex && (!value.isDigit() || value == '.')){
                             operation = operation.substring(0, operation.length-1)
                         }
                     }
-                    viewModel.subOperate(operation)
                 }
+                viewModel.modifyOperation(operation)
+                viewModel.subOperate(operation)
             }
 
             btnErase.setOnLongClickListener {
@@ -126,6 +130,18 @@ class MainActivity : AppCompatActivity() {
             btnEqual.setOnClickListener {
                 operation = viewModel.setEquals()
                 viewModel.subOperate(operation)
+            }
+
+            tvShowResult.inputType = InputType.TYPE_NULL
+
+            editTextShowOperation.setOnClickListener {
+                val position = editTextShowOperation.selectionEnd
+                Toast.makeText(this@MainActivity, "position: $position", Toast.LENGTH_SHORT).show()
+            }
+
+            btnShrek.setOnClickListener {
+                val snack = Snackbar.make(it,"Finlandia!",Snackbar.LENGTH_LONG)
+                snack.show()
             }
         }
     }
