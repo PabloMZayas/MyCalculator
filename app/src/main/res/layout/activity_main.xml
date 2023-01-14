@@ -7,26 +7,15 @@
     android:padding="2dp"
     tools:context=".MainActivity">
 
-    <ImageButton
-        android:padding="5dp"
-        android:id="@+id/btn_shrek"
-        android:layout_width="100dp"
-        android:layout_height="110dp"
-        android:background="@drawable/circle_button"
-        android:src="@drawable/patric"
-        app:layout_constraintBottom_toBottomOf="@+id/layout_et_showOperation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/layout_et_showOperation" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_et_showOperation"
         android:layout_marginStart="5dp"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_shrek"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
@@ -77,103 +66,67 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-
-                <ImageButton
-                    android:id="@+id/btn_clear"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:src="@drawable/waste"
-                    android:text="C"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageButton
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="7"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/btn_clear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:src="@drawable/waste"
+                android:text="C"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btn_4"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="4"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_1"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="1"
-                    android:textSize="22sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/btn_7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:text="7"
+                android:textSize="22sp" />
 
-                <Button
-                    android:id="@+id/btn_pi"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="π"
-                    android:textSize="22sp" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/btn_4"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:text="4"
+                android:textSize="22sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_1"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="1"
+                android:textSize="22sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_pi"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="π"
+                android:textSize="22sp" />
 
 
         </LinearLayout>
@@ -184,105 +137,72 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-
-                <ImageButton
-                    android:id="@+id/btn_division"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:src="@drawable/divide"
-                    android:text="÷"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageButton
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_8"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="8"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/btn_division"
+                style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:src="@drawable/divide"
+                android:text="÷"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btn_5"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="5"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_2"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="2"
-                    android:textSize="22sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/btn_8"
+                style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="8"
+                android:textSize="22sp" />
 
-                <Button
-                    android:id="@+id/btn_0"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="0"
-                    android:textSize="22sp" />
-            </LinearLayout>
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_5"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="5"
+                android:textSize="22sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_2"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="2"
+                android:textSize="22sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_0"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="0"
+                android:textSize="22sp" />
 
 
         </LinearLayout>
@@ -293,106 +213,72 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-
-                <ImageButton
-                    android:id="@+id/btn_multiplication"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:src="@drawable/multiply"
-                    android:text="x"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageButton
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_9"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="9"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/btn_multiplication"
+                style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:src="@drawable/multiply"
+                android:text="x"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btn_6"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="6"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_3"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="3"
-                    android:textSize="22sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/btn_9"
+                style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="9"
+                android:textSize="22sp" />
 
-                <Button
-                    android:id="@+id/btn_point"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:text="."
-                    android:textSize="30sp" />
-            </LinearLayout>
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_6"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="6"
+                android:textSize="22sp" />
 
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_3"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="3"
+                android:textSize="22sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_point"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:text="."
+                android:textSize="30sp" />
 
         </LinearLayout>
 
@@ -402,91 +288,63 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/btn_erase"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:src="@drawable/ic_arrow_back"
-                    android:textAlignment="center"
-                    android:textSize="50sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageButton
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/btn_minus"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:src="@drawable/substract"
-                    android:text="-"
-                    android:textSize="30sp"
-
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/btn_erase"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:src="@drawable/ic_arrow_back"
+                android:textAlignment="center"
+                android:textSize="50sp"
+                android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/btn_plus"
-                    style="button_filled_pink_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:src="@drawable/plus"
-                    android:text="+"
-                    android:textSize="30sp"
-
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
+            <ImageButton
+                android:layout_weight="1"
+                android:id="@+id/btn_minus"
+                style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.75">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:src="@drawable/substract"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/btn_equal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/baby_blue"
-                    android:src="@drawable/equal"
-                    android:text="="
-                    android:textSize="28sp"
+            <ImageButton
+                android:layout_weight="1"
+                android:id="@+id/btn_plus"
+                style="button_filled_pink_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:src="@drawable/plus"
+                android:text="+"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-                    android:textStyle="bold" />
-            </LinearLayout>
+
+            <ImageButton
+                android:layout_weight="0.75"
+                android:id="@+id/btn_equal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/baby_blue"
+                android:src="@drawable/equal"
+                android:text="="
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.subOperate(operation)
                 viewModel.modifyOperation(operation)}
 
-            btn8.setOnClickListener { operation += "8"
+            btn8.setOnClickListener{ operation += "8"
                 viewModel.subOperate(operation)
                 viewModel.modifyOperation(operation)}
 
@@ -139,10 +139,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "position: $position", Toast.LENGTH_SHORT).show()
             }
 
-            btnShrek.setOnClickListener {
+            /*btnShrek.setOnClickListener {
                 val snack = Snackbar.make(it,"Finlandia!",Snackbar.LENGTH_LONG)
                 snack.show()
-            }
+            }*/
         }
     }
 }
