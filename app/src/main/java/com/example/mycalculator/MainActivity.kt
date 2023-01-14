@@ -6,7 +6,6 @@ import android.text.InputType
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.mycalculator.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.calculate.observe(this){ operation ->
             if(operation.length>11)
-                binding.editTextShowOperation.textSize = 25f
+                binding.editTextShowOperation.textSize = 30f
             binding.editTextShowOperation.setText(operation)
         }
     }
@@ -93,10 +92,11 @@ class MainActivity : AppCompatActivity() {
                 viewModel.modifyOperation(operation)}
 
             btnPoint.setOnClickListener { operation += "."
-                viewModel.subOperate(operation)
                 viewModel.modifyOperation(operation)}
 
-            btnPi.setOnClickListener { operation += "3.141592653589793"}
+            btnPercentage.setOnClickListener {
+
+            }
 
             btnClear.setOnClickListener {
                 editTextShowOperation.setText("")
@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnEqual.setOnClickListener {
+
                 operation = viewModel.setEquals()
                 viewModel.subOperate(operation)
             }

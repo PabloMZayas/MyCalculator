@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class CalculatorViewModel: ViewModel() {
 
-    private var _result = MutableLiveData(0.0f)
-    val result: LiveData<Float> = _result
+    private var _result = MutableLiveData(0.0)
+    val result: LiveData<Double> = _result
 
     private var _calculate = MutableLiveData("")
     val calculate: LiveData<String> = _calculate
@@ -24,7 +24,7 @@ class CalculatorViewModel: ViewModel() {
 
     fun subOperate(operation: String) {
         if(operation == ""){
-            _result.value = 0.0f
+            _result.value = 0.0
         } else {
 
             _calculate.value = operation
@@ -91,32 +91,32 @@ class CalculatorViewModel: ViewModel() {
         var iterations = operationsSymbols.size
         //var _result = 0.0f
         var i = 0
-        var multiplicationAux = 1.0f
-        var multiplicationAux2 = 1.0f
-        var divisionAux = 1.0f
-        var divisionAux2 = 1.0f
-        var auxGraL: Float
-        val auxNeg2: Float
-        val auxNeg3: Float
+        var multiplicationAux = 1.0
+        var multiplicationAux2 = 1.0
+        var divisionAux = 1.0
+        var divisionAux2 = 1.0
+        var auxGraL: Double
+        val auxNeg2: Double
+        val auxNeg3: Double
 
         if(auxNeg ==1){
-            auxNeg3 = subsequencesOfOperations[0].toFloat()
+            auxNeg3 = subsequencesOfOperations[0].toDouble()
             auxNeg2 = auxNeg3
         } else{
-            auxNeg3 = subsequencesOfOperations[0].toFloat()
+            auxNeg3 = subsequencesOfOperations[0].toDouble()
             auxNeg2 = auxNeg3
         }
 
         if(iterations == 0)
-            _result.value = subsequencesOfOperations[0].toFloat()
+            _result.value = subsequencesOfOperations[0].toDouble()
 
         while (iterations != 0) {
             if (i == 0) {
                 when (operationsSymbols[i]){
-                    '+' -> _result.value = auxNeg2 + subsequencesOfOperations[1].toFloat()
-                    '-' -> _result.value = auxNeg2 - subsequencesOfOperations[1].toFloat()
+                    '+' -> _result.value = auxNeg2 + subsequencesOfOperations[1].toDouble()
+                    '-' -> _result.value = auxNeg2 - subsequencesOfOperations[1].toDouble()
                     'x' -> {
-                        multiplicationAux = auxNeg2 * subsequencesOfOperations[1].toFloat()
+                        multiplicationAux = auxNeg2 * subsequencesOfOperations[1].toDouble()
                         _result.value = multiplicationAux
                         multiplicationAux2 = multiplicationAux
 
@@ -124,7 +124,7 @@ class CalculatorViewModel: ViewModel() {
                         divisionAux2 = multiplicationAux2
                     }
                     '÷' -> {
-                        divisionAux = auxNeg2 / subsequencesOfOperations[1].toFloat()
+                        divisionAux = auxNeg2 / subsequencesOfOperations[1].toDouble()
                         _result.value = divisionAux
                         divisionAux2 = divisionAux
 
@@ -137,56 +137,56 @@ class CalculatorViewModel: ViewModel() {
                 if (operationsSymbols[i].compareTo('+') == 0) {
                     //_result.value += subsequencesOfOperations[i + 1].toFloat()
                     auxGraL = _result.value!!
-                    auxGraL+= subsequencesOfOperations[i + 1].toFloat()
+                    auxGraL+= subsequencesOfOperations[i + 1].toDouble()
                     _result.value = auxGraL
-                    multiplicationAux = 1.0f
-                    multiplicationAux2 = 1.0f
-                    divisionAux = 1.0f
-                    divisionAux2 = 1.0f
+                    multiplicationAux = 1.0
+                    multiplicationAux2 = 1.0
+                    divisionAux = 1.0
+                    divisionAux2 = 1.0
                 }
 
                 if (operationsSymbols[i].compareTo('-') == 0) {
                     auxGraL = _result.value!!
-                    auxGraL -= subsequencesOfOperations[i + 1].toFloat()
+                    auxGraL -= subsequencesOfOperations[i + 1].toDouble()
                     _result.value = auxGraL
                     //_result -= subsequencesOfOperations[i + 1].toFloat()
-                    multiplicationAux = -1.0f
-                    multiplicationAux2 = -1.0f
-                    divisionAux = -1.0f
-                    divisionAux2 = -1.0f
+                    multiplicationAux = -1.0
+                    multiplicationAux2 = -1.0
+                    divisionAux = -1.0
+                    divisionAux2 = -1.0
                 }
 
                 if (operationsSymbols[i].compareTo('x') == 0) {
                     when(operationsSymbols[i-1]){
                         '+' -> {
                             multiplicationAux =
-                                subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                                subsequencesOfOperations[i].toDouble() * subsequencesOfOperations[i + 1].toDouble()  - subsequencesOfOperations[i].toDouble()
                             auxGraL = _result.value!!
                             auxGraL += multiplicationAux
                             _result.value = auxGraL
                             //_result += multiplicationAux
-                            multiplicationAux2 = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
-                            multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                            multiplicationAux2 = subsequencesOfOperations[i].toDouble() * subsequencesOfOperations[i + 1].toDouble()
+                            multiplicationAux = subsequencesOfOperations[i].toDouble() * subsequencesOfOperations[i + 1].toDouble()
 
                             divisionAux = multiplicationAux
                             divisionAux2 = multiplicationAux2
                         }
                         '-' -> {
                             multiplicationAux =
-                                subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                                subsequencesOfOperations[i].toDouble() * subsequencesOfOperations[i + 1].toDouble()  - subsequencesOfOperations[i].toDouble()
                             auxGraL = _result.value!!
                             auxGraL -= multiplicationAux
                             _result.value = auxGraL
                             //_result -= multiplicationAux
-                            multiplicationAux2 = -subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
-                            multiplicationAux = -subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[i + 1].toFloat()
+                            multiplicationAux2 = -subsequencesOfOperations[i].toDouble() * subsequencesOfOperations[i + 1].toDouble()
+                            multiplicationAux = -subsequencesOfOperations[i].toDouble() * subsequencesOfOperations[i + 1].toDouble()
 
                             divisionAux = multiplicationAux
                             divisionAux2 = multiplicationAux2
                         }
 
                         '÷' -> {
-                            divisionAux *= subsequencesOfOperations[i + 1].toFloat()
+                            divisionAux *= subsequencesOfOperations[i + 1].toDouble()
                             auxGraL = _result.value!!
                             auxGraL = auxGraL + divisionAux - divisionAux2
                             _result.value = auxGraL
@@ -199,7 +199,7 @@ class CalculatorViewModel: ViewModel() {
                         }
 
                         'x' -> {
-                            multiplicationAux *= subsequencesOfOperations[i + 1].toFloat()
+                            multiplicationAux *= subsequencesOfOperations[i + 1].toDouble()
                             auxGraL = _result.value!!
                             auxGraL = auxGraL + multiplicationAux - multiplicationAux2
                             _result.value = auxGraL
@@ -217,33 +217,33 @@ class CalculatorViewModel: ViewModel() {
                     when(operationsSymbols[i-1]){
                         '+' -> {
                             divisionAux =
-                                subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                                subsequencesOfOperations[i].toDouble() / subsequencesOfOperations[i + 1].toDouble()  - subsequencesOfOperations[i].toDouble()
                             auxGraL = _result.value!!
                             auxGraL += divisionAux
                             _result.value = auxGraL
                             //_result += divisionAux
-                            divisionAux2 = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
-                            divisionAux = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+                            divisionAux2 = subsequencesOfOperations[i].toDouble() / subsequencesOfOperations[i + 1].toDouble()
+                            divisionAux = subsequencesOfOperations[i].toDouble() / subsequencesOfOperations[i + 1].toDouble()
 
                             multiplicationAux = divisionAux
                             multiplicationAux2 = divisionAux2
                         }
                         '-' -> {
                             divisionAux =
-                                subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()  - subsequencesOfOperations[i].toFloat()
+                                subsequencesOfOperations[i].toDouble() / subsequencesOfOperations[i + 1].toDouble()  - subsequencesOfOperations[i].toDouble()
                             auxGraL = _result.value!!
                             auxGraL -= divisionAux
                             _result.value = auxGraL
                             //_result -= divisionAux
-                            divisionAux2 = -subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
-                            divisionAux = -subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[i + 1].toFloat()
+                            divisionAux2 = -subsequencesOfOperations[i].toDouble() / subsequencesOfOperations[i + 1].toDouble()
+                            divisionAux = -subsequencesOfOperations[i].toDouble() / subsequencesOfOperations[i + 1].toDouble()
 
                             multiplicationAux = divisionAux
                             multiplicationAux2 = divisionAux2
                         }
 
                         '÷' -> {
-                            divisionAux /= subsequencesOfOperations[i + 1].toFloat()
+                            divisionAux /= subsequencesOfOperations[i + 1].toDouble()
                             auxGraL = _result.value!!
                             auxGraL = auxGraL + divisionAux - divisionAux2
                             _result.value = auxGraL
@@ -256,7 +256,7 @@ class CalculatorViewModel: ViewModel() {
                         }
 
                         'x' -> {
-                            divisionAux /= subsequencesOfOperations[i + 1].toFloat()
+                            divisionAux /= subsequencesOfOperations[i + 1].toDouble()
                             auxGraL = _result.value!!
                             auxGraL = auxGraL + divisionAux - divisionAux2
                             _result.value = auxGraL
