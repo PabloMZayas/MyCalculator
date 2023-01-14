@@ -2,17 +2,31 @@ package com.example.mycalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import com.example.mycalculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel: CalculatorViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        showOperation()
+        //showOperation()
+        initObservers()
+        receiveOperation()
+    }
+
+    private fun initObservers() {
+        viewModel.result.observe(this){ result->
+            binding.tvShowResult.setText(result.toString())
+        }
+
+        viewModel.calculate.observe(this){ operation ->
+            binding.editTextShowOperation.setText(operation)
+        }
     }
 
     private fun subOperate(operation: String) {
@@ -21,13 +35,21 @@ class MainActivity : AppCompatActivity() {
         val subsequencesOfOperations = mutableListOf<String>()
         var numberOfOperations = 0
         var auxNumberOfOperations = 0
+        var auxNeg = 0
+
 
         for ((index, value) in operation.withIndex()) {
-            if (!value.isDigit() && value != '.') {
-                numberOfOperations++
-                auxNumberOfOperations++
-                indices.add(index)
-                operationsSymbols.add(value)
+            if(index == 0 && value == '-'){
+                    auxNeg = 1
+            }
+
+            else{
+                if (!value.isDigit() && value != '.') {
+                    numberOfOperations++
+                    auxNumberOfOperations++
+                    indices.add(index)
+                    operationsSymbols.add(value)
+                }
             }
         }
 
@@ -37,7 +59,6 @@ class MainActivity : AppCompatActivity() {
 
 
         if (numberOfOperations != 0) {
-
             subsequencesOfOperations.add(operation.subSequence(0, indices[0]).toString())
             numberOfOperations--
         }
@@ -62,10 +83,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        operate (subsequencesOfOperations, operationsSymbols)
+
+        operate (subsequencesOfOperations, operationsSymbols, auxNeg)
     }
 
-    private fun operate(subsequencesOfOperations: MutableList<String>, operationsSymbols: MutableList<Char>) {
+    private fun operate(subsequencesOfOperations: MutableList<String>, operationsSymbols: MutableList<Char>, auxNeg: Int) {
         var iterations = operationsSymbols.size
         var result = 0.0f
         var i = 0
@@ -73,6 +95,16 @@ class MainActivity : AppCompatActivity() {
         var multiplicationAux2 = 1.0f
         var divisionAux = 1.0f
         var divisionAux2 = 1.0f
+        var auxNeg2: Float
+        var auxNeg3: Float
+
+        if(auxNeg ==1){
+            auxNeg3 = subsequencesOfOperations[0].toFloat()
+            auxNeg2 = auxNeg3
+        } else{
+            auxNeg3 = subsequencesOfOperations[0].toFloat()
+            auxNeg2 = auxNeg3
+        }
 
         if(iterations == 0)
             result = subsequencesOfOperations[0].toFloat()
@@ -80,10 +112,10 @@ class MainActivity : AppCompatActivity() {
         while (iterations != 0) {
             if (i == 0) {
                 when (operationsSymbols[i]){
-                    '+' -> result = subsequencesOfOperations[i].toFloat() + subsequencesOfOperations[1].toFloat()
-                    '-' -> result = subsequencesOfOperations[i].toFloat() - subsequencesOfOperations[1].toFloat()
+                    '+' -> result = auxNeg2 + subsequencesOfOperations[1].toFloat()
+                    '-' -> result = auxNeg2 - subsequencesOfOperations[1].toFloat()
                     'x' -> {
-                        multiplicationAux = subsequencesOfOperations[i].toFloat() * subsequencesOfOperations[1].toFloat()
+                        multiplicationAux = auxNeg2 * subsequencesOfOperations[1].toFloat()
                         result = multiplicationAux
                         multiplicationAux2 = multiplicationAux
 
@@ -91,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                         divisionAux2 = multiplicationAux2
                     }
                     '/' -> {
-                        divisionAux = subsequencesOfOperations[i].toFloat() / subsequencesOfOperations[1].toFloat()
+                        divisionAux = auxNeg2 / subsequencesOfOperations[1].toFloat()
                         result = divisionAux
                         divisionAux2 = divisionAux
 
@@ -219,7 +251,6 @@ class MainActivity : AppCompatActivity() {
         binding.tvShowResult.setText(roundOff.toString())
     }
 
-
     private fun showOperation() {
         var operation = ""
         with(binding) {
@@ -329,6 +360,87 @@ class MainActivity : AppCompatActivity() {
 
             btnEqual.setOnClickListener {
                 subOperate(operation)
+            }
+        }
+    }
+
+    private fun receiveOperation() {
+        var operation = ""
+        with(binding) {
+
+            btn0.setOnClickListener { operation += "0"
+                viewModel.modifyOperation(operation)}
+
+            btn1.setOnClickListener { operation += "1"
+                viewModel.modifyOperation(operation)}
+
+            btn2.setOnClickListener { operation += "2"
+                viewModel.modifyOperation(operation)}
+
+            btn3.setOnClickListener { operation += "3"
+                viewModel.modifyOperation(operation)}
+
+            btn4.setOnClickListener { operation += "4"
+                viewModel.modifyOperation(operation)}
+
+            btn5.setOnClickListener { operation += "5"
+                viewModel.modifyOperation(operation)}
+
+            btn6.setOnClickListener { operation += "6"
+                viewModel.modifyOperation(operation)}
+
+            btn7.setOnClickListener { operation += "7"
+                viewModel.modifyOperation(operation)}
+
+            btn8.setOnClickListener { operation += "8"
+                viewModel.modifyOperation(operation)}
+
+            btn9.setOnClickListener { operation += "9"
+                viewModel.modifyOperation(operation)}
+
+            btnPlus.setOnClickListener { operation += "+"
+                viewModel.modifyOperation(operation)}
+
+            btnMinus.setOnClickListener { operation += "-"
+                viewModel.modifyOperation(operation)}
+
+            btnMultiplication.setOnClickListener { operation += "x"
+                viewModel.modifyOperation(operation)}
+
+            btnDivision.setOnClickListener { operation += "/"
+                viewModel.modifyOperation(operation)}
+
+            btnPoint.setOnClickListener { operation += "."
+                viewModel.modifyOperation(operation)}
+
+            btnPi.setOnClickListener { operation += "3.141592653589793"}
+
+            btnClear.setOnClickListener {
+                editTextShowOperation.setText("")
+                tvShowResult.setText("")
+                operation = ""
+            }
+
+            btnErase.setOnClickListener {
+                val auxOperation: String
+                if (operation.isNotEmpty()) {
+                    auxOperation = operation.subSequence(0, operation.lastIndex).toString()
+                    operation = auxOperation
+                    //editTextShowOperation.setText(operation)
+                }
+                viewModel.modifyOperation(operation)
+            }
+
+            btnErase.setOnLongClickListener {
+                editTextShowOperation.setText("")
+                tvShowResult.setText("")
+                operation = ""
+                return@setOnLongClickListener true
+            }
+
+            btnEqual.setOnClickListener {
+                viewModel.subOperate(operation)
+                //subOperate(operation)
             }
         }
     }
