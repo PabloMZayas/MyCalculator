@@ -3,8 +3,6 @@ package com.example.mycalculator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 class CalculatorViewModel: ViewModel() {
 
@@ -18,63 +16,75 @@ class CalculatorViewModel: ViewModel() {
             _calculate.value = operation
     }
 
+    fun setEquals(): String{
+        var change = _result.value.toString()
+        _calculate.value = change
+        return  change
+    }
+
     fun subOperate(operation: String) {
-        _calculate.value = operation
-        val indices = mutableListOf<Int>()
-        val operationsSymbols = mutableListOf<Char>()
-        val subsequencesOfOperations = mutableListOf<String>()
-        var numberOfOperations = 0
-        var auxNumberOfOperations = 0
-        var auxNeg = 0
+        if(operation == ""){
+            _result.value = 0.0f
+        } else {
 
+            _calculate.value = operation
+            val indices = mutableListOf<Int>()
+            val operationsSymbols = mutableListOf<Char>()
+            val subsequencesOfOperations = mutableListOf<String>()
+            var numberOfOperations = 0
+            var auxNumberOfOperations = 0
+            var auxNeg = 0
 
-        for ((index, value) in operation.withIndex()) {
-            if(index == 0 && value == '-'){
-                auxNeg = 1
-            }
+            //return str.substring(0, str.length - n)
+            for ((index, value) in operation.withIndex()) {
+                if(index == 0 && value == '-'){
+                    auxNeg = 1
+                }
 
-            else{
-                if (!value.isDigit() && value != '.') {
-                    numberOfOperations++
-                    auxNumberOfOperations++
-                    indices.add(index)
-                    operationsSymbols.add(value)
+                else{
+                    if (!value.isDigit() && value != '.') {
+                        numberOfOperations++
+                        auxNumberOfOperations++
+                        indices.add(index)
+                        operationsSymbols.add(value)
+                    }
                 }
             }
-        }
 
-        if(numberOfOperations == 0 && operation.isNotEmpty()){
-            subsequencesOfOperations.add(operation)
-        }
+            if(numberOfOperations == 0 && operation.isNotEmpty()){
+                subsequencesOfOperations.add(operation)
+            }
 
 
-        if (numberOfOperations != 0) {
+            if (numberOfOperations != 0) {
 
-            subsequencesOfOperations.add(operation.subSequence(0, indices[0]).toString())
-            numberOfOperations--
-        }
+                subsequencesOfOperations.add(operation.subSequence(0, indices[0]).toString())
+                numberOfOperations--
+            }
 
-        var i = 0
-        while (numberOfOperations > 0) {
-            subsequencesOfOperations.add(
-                operation.subSequence(indices[i] + 1, indices[i + 1]).toString()
-            )
-            i++
-            numberOfOperations--
-        }
+            var i = 0
+            while (numberOfOperations > 0) {
+                subsequencesOfOperations.add(
+                    operation.subSequence(indices[i] + 1, indices[i + 1]).toString()
+                )
+                i++
+                numberOfOperations--
+            }
 
-        if (operation.isNotEmpty() && indices.isNotEmpty()) {
-            subsequencesOfOperations.add(operation.subSequence(indices[i] + 1, operation.lastIndex + 1).toString())
-        }
+            if (operation.isNotEmpty() && indices.isNotEmpty()) {
+                subsequencesOfOperations.add(operation.subSequence(indices[i] + 1, operation.lastIndex + 1).toString())
+            }
 
-        if (subsequencesOfOperations.isNotEmpty()) {
-            subsequencesOfOperations.forEach {
-                if (it.compareTo("") == 0) {
-                    subsequencesOfOperations.removeAt(subsequencesOfOperations.size-1)
+            if (subsequencesOfOperations.isNotEmpty()) {
+                subsequencesOfOperations.forEach {
+                    if (it.compareTo("") == 0) {
+                        subsequencesOfOperations.removeAt(subsequencesOfOperations.size-1)
+                    }
                 }
             }
+
+            operate (subsequencesOfOperations, operationsSymbols, auxNeg)
         }
-        operate (subsequencesOfOperations, operationsSymbols, auxNeg)
     }
 
     private fun operate(subsequencesOfOperations: MutableList<String>, operationsSymbols: MutableList<Char>, auxNeg: Int) {
@@ -86,8 +96,8 @@ class CalculatorViewModel: ViewModel() {
         var divisionAux = 1.0f
         var divisionAux2 = 1.0f
         var auxGraL: Float
-        var auxNeg2: Float
-        var auxNeg3: Float
+        val auxNeg2: Float
+        val auxNeg3: Float
 
         if(auxNeg ==1){
             auxNeg3 = subsequencesOfOperations[0].toFloat()
@@ -113,7 +123,7 @@ class CalculatorViewModel: ViewModel() {
                         divisionAux = multiplicationAux
                         divisionAux2 = multiplicationAux2
                     }
-                    '/' -> {
+                    '÷' -> {
                         divisionAux = auxNeg2 / subsequencesOfOperations[1].toFloat()
                         _result.value = divisionAux
                         divisionAux2 = divisionAux
@@ -175,7 +185,7 @@ class CalculatorViewModel: ViewModel() {
                             divisionAux2 = multiplicationAux2
                         }
 
-                        '/' -> {
+                        '÷' -> {
                             divisionAux *= subsequencesOfOperations[i + 1].toFloat()
                             auxGraL = _result.value!!
                             auxGraL = auxGraL + divisionAux - divisionAux2
@@ -203,7 +213,7 @@ class CalculatorViewModel: ViewModel() {
                     }
                 }
 
-                if (operationsSymbols[i].compareTo('/') == 0) {
+                if (operationsSymbols[i].compareTo('÷') == 0) {
                     when(operationsSymbols[i-1]){
                         '+' -> {
                             divisionAux =
@@ -232,7 +242,7 @@ class CalculatorViewModel: ViewModel() {
                             multiplicationAux2 = divisionAux2
                         }
 
-                        '/' -> {
+                        '÷' -> {
                             divisionAux /= subsequencesOfOperations[i + 1].toFloat()
                             auxGraL = _result.value!!
                             auxGraL = auxGraL + divisionAux - divisionAux2
@@ -263,11 +273,5 @@ class CalculatorViewModel: ViewModel() {
             i++
             iterations--
         }
-
-
-        val decimalFormat = DecimalFormat("#,###.####")
-        decimalFormat.roundingMode = RoundingMode.DOWN
-        //val roundOff = decimalFormat.format(_result)
-        //binding.tvShowResult.setText(roundOff.toString())
     }
 }
