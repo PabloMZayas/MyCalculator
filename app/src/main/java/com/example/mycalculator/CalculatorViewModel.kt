@@ -22,7 +22,7 @@ class CalculatorViewModel: ViewModel() {
         return  change
     }
 
-    fun subOperate(operation: String) {
+    fun subOperate(operation: String, checkLast: Int) {
         if(operation == ""){
             _result.value = 0.0
         } else {
@@ -36,7 +36,9 @@ class CalculatorViewModel: ViewModel() {
             var auxNeg = 0
 
             //return str.substring(0, str.length - n)
+
             for ((index, value) in operation.withIndex()) {
+                //auxNeg permite saber si la operacion inicia con num negativo
                 if(index == 0 && value == '-'){
                     auxNeg = 1
                 }
@@ -83,11 +85,11 @@ class CalculatorViewModel: ViewModel() {
                 }
             }
 
-            operate (subsequencesOfOperations, operationsSymbols, auxNeg)
+            operate (subsequencesOfOperations, operationsSymbols, auxNeg, checkLast)
         }
     }
 
-    private fun operate(subsequencesOfOperations: MutableList<String>, operationsSymbols: MutableList<Char>, auxNeg: Int) {
+    private fun operate(subsequencesOfOperations: MutableList<String>, operationsSymbols: MutableList<Char>, auxNeg: Int, checkLast: Int) {
         var iterations = operationsSymbols.size
         //var _result = 0.0f
         var i = 0
@@ -146,6 +148,7 @@ class CalculatorViewModel: ViewModel() {
                 }
 
                 if (operationsSymbols[i].compareTo('-') == 0) {
+
                     auxGraL = _result.value!!
                     auxGraL -= subsequencesOfOperations[i + 1].toDouble()
                     _result.value = auxGraL

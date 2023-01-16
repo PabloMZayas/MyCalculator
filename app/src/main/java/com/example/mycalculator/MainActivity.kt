@@ -2,7 +2,6 @@ package com.example.mycalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.mycalculator.databinding.ActivityMainBinding
@@ -10,6 +9,8 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
+    private var operation = ""
+    var checkLast = 0
     private val viewModel: CalculatorViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,67 +37,53 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun receiveOperation() {
-        var operation = ""
         with(binding) {
 
-            btn0.setOnClickListener { operation += "0"
-                viewModel.subOperate(operation)
+            btn0.setOnClickListener { callViewModel('0')}
+
+            btn1.setOnClickListener { callViewModel('1')}
+
+            btn2.setOnClickListener { callViewModel('2')}
+
+            btn3.setOnClickListener { callViewModel('3')}
+
+            btn4.setOnClickListener { callViewModel('4')}
+
+            btn5.setOnClickListener { callViewModel('5')}
+
+            btn6.setOnClickListener { callViewModel('6')}
+
+            btn7.setOnClickListener { callViewModel('7')}
+
+            btn8.setOnClickListener{ callViewModel('8')}
+
+            btn9.setOnClickListener { callViewModel('9')}
+
+            btnPlus.setOnClickListener { callViewModelWithSymbol('+')}
+
+            btnMinus.setOnClickListener {
+                val lastIndex = operation.lastIndex
+                for ((index, value) in operation.withIndex()) {
+                    if (index == lastIndex && (!value.isDigit() || value == '.') && value!= '÷' && value != 'x'){
+                        operation = operation.substring(0, operation.length-1)
+                        checkLast = 1
+                        Toast.makeText(this@MainActivity, "checkLast = $checkLast", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                operation += "-"
                 viewModel.modifyOperation(operation)}
 
-            btn1.setOnClickListener { operation += "1"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
+            btnMultiplication.setOnClickListener {callViewModelWithSymbol('x')}
 
-            btn2.setOnClickListener { operation += "2"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
+            btnDivision.setOnClickListener {callViewModelWithSymbol('÷')}
 
-            btn3.setOnClickListener { operation += "3"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
-
-            btn4.setOnClickListener { operation += "4"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
-
-            btn5.setOnClickListener { operation += "5"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
-
-            btn6.setOnClickListener { operation += "6"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
-
-            btn7.setOnClickListener { operation += "7"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
-
-            btn8.setOnClickListener{ operation += "8"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
-
-            btn9.setOnClickListener { operation += "9"
-                viewModel.subOperate(operation)
-                viewModel.modifyOperation(operation)}
-
-            btnPlus.setOnClickListener { operation += "+"
-                viewModel.modifyOperation(operation)}
-
-            btnMinus.setOnClickListener { operation += "-"
-                viewModel.modifyOperation(operation)}
-
-            btnMultiplication.setOnClickListener { operation += "x"
-                viewModel.modifyOperation(operation)}
-
-            btnDivision.setOnClickListener { operation += "÷"
-                viewModel.modifyOperation(operation)}
 
             btnPoint.setOnClickListener { operation += "."
                 viewModel.modifyOperation(operation)}
 
             btnPercentage.setOnClickListener {
-
-            }
+                operation+='%'
+                viewModel.modifyOperation(operation)}
 
             btnClear.setOnClickListener {
                 editTextShowOperation.setText("")
@@ -117,23 +104,20 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 viewModel.modifyOperation(operation)
-                viewModel.subOperate(operation)
+                viewModel.subOperate(operation, checkLast)
             }
 
             btnErase.setOnLongClickListener {
                 operation = ""
                 viewModel.modifyOperation(operation)
-                viewModel.subOperate(operation)
+                viewModel.subOperate(operation, checkLast)
                 return@setOnLongClickListener true
             }
 
             btnEqual.setOnClickListener {
-
                 operation = viewModel.setEquals()
-                viewModel.subOperate(operation)
+                viewModel.subOperate(operation, checkLast)
             }
-
-            tvShowResult.inputType = InputType.TYPE_NULL
 
             editTextShowOperation.setOnClickListener {
                 val position = editTextShowOperation.selectionEnd
@@ -146,4 +130,23 @@ class MainActivity : AppCompatActivity() {
             }*/
         }
     }
+
+    private fun callViewModelWithSymbol(c: Char) {
+        val lastIndex = operation.lastIndex
+        for ((index, value) in operation.withIndex()) {
+            if (index == lastIndex && (!value.isDigit() || value == '.')){
+                operation = operation.substring(0, operation.length-1)
+            }
+        }
+        operation += c
+        viewModel.modifyOperation(operation)
+    }
+
+    private fun callViewModel(c: Char) {
+        operation+=c
+        viewModel.subOperate(operation, checkLast)
+        viewModel.modifyOperation(operation)
+    }
+
 }
+
