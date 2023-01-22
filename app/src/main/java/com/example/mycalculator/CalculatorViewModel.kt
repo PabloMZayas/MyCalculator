@@ -12,8 +12,8 @@ class CalculatorViewModel: ViewModel() {
     private var _calculate = MutableLiveData("")
     val calculate: LiveData<String> = _calculate
 
-    fun modifyOperation(operation: String){
-            _calculate.value = operation
+    fun modifyOperation(falseOperation: String){
+            _calculate.value = falseOperation
     }
 
     fun setEquals(): String{
@@ -22,7 +22,7 @@ class CalculatorViewModel: ViewModel() {
         return  change
     }
 
-    fun subOperate(operation: String, checkLast: Int) {
+    fun subOperate(operation: String) {
         if(operation == ""){
             _result.value = 0.0
         } else {
@@ -85,11 +85,11 @@ class CalculatorViewModel: ViewModel() {
                 }
             }
 
-            operate (subsequencesOfOperations, operationsSymbols, auxNeg, checkLast)
+            operate (subsequencesOfOperations, operationsSymbols, auxNeg)
         }
     }
 
-    private fun operate(subsequencesOfOperations: MutableList<String>, operationsSymbols: MutableList<Char>, auxNeg: Int, checkLast: Int) {
+    private fun operate(subsequencesOfOperations: MutableList<String>, operationsSymbols: MutableList<Char>, auxNeg: Int) {
         var iterations = operationsSymbols.size
         //var _result = 0.0f
         var i = 0

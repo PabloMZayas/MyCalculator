@@ -8,7 +8,12 @@
     android:padding="2dp"
     tools:context=".MainActivity">
 
+
+
     <com.google.android.material.textfield.TextInputLayout
+        app:boxBackgroundColor="@color/white"
+        style="?attr/textInputFilledStyle"
+        app:boxStrokeWidth="0dp"
         android:id="@+id/layout_et_showOperation"
         android:layout_width="0dp"
         android:layout_height="130dp"
@@ -22,7 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="124dp"
             android:enabled="false"
-            android:text="0"
+            android:autoSizeTextType="uniform"
+            android:text=""
+            android:ellipsize="end"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="30sp" />
@@ -35,16 +42,19 @@
         android:layout_marginHorizontal="5dp"
         android:layout_width="match_parent"
         android:layout_height="130dp"
+        app:boxBackgroundColor="@color/white"
+        style="?attr/textInputFilledStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintTop_toBottomOf="@+id/layout_et_showOperation">
 
         <EditText
             android:id="@+id/tv_showResult"
             android:layout_width="match_parent"
             android:layout_height="124dp"
-            android:text="0"
+            android:text=""
             android:enabled="false"
             android:textAlignment="textEnd"
             android:textColor="#954444"
@@ -57,8 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="2dp"
         android:background="@drawable/linear_layout_background"
-        android:paddingVertical="20dp"
+        android:paddingVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_tv_showResult"
         tools:layout_editor_absoluteX="10dp">
@@ -74,8 +85,8 @@
                 android:id="@+id/btn_clear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:src="@drawable/waste"
@@ -88,22 +99,22 @@
                 android:id="@+id/btn_7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:text="7"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/btn_4"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:text="4"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -111,12 +122,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="1"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -124,12 +135,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="%"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
 
         </LinearLayout>
@@ -146,13 +157,13 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:src="@drawable/divide"
                 android:text="÷"
-                android:textSize="30sp"
+                android:textSize="35sp"
                 android:textStyle="bold" />
 
             <Button
@@ -161,12 +172,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="8"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -174,12 +185,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="5"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -187,12 +198,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="2"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -200,12 +211,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="0"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
 
         </LinearLayout>
@@ -222,13 +233,13 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:src="@drawable/multiply"
                 android:text="x"
-                android:textSize="22sp"
+                android:textSize="35sp"
                 android:textStyle="bold" />
 
             <Button
@@ -237,12 +248,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="9"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -250,12 +261,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="6"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -263,12 +274,12 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="3"
-                android:textSize="22sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:layout_weight="1"
@@ -276,8 +287,8 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:text="."
@@ -296,8 +307,8 @@
                 android:id="@+id/btn_erase"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:src="@drawable/ic_arrow_back"
@@ -311,8 +322,8 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:src="@drawable/substract"
@@ -325,8 +336,8 @@
                 style="button_filled_pink_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:src="@drawable/plus"
@@ -340,8 +351,8 @@
                 android:id="@+id/btn_equal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/circle_button"
                 android:backgroundTint="@color/baby_blue"
                 android:src="@drawable/equal"

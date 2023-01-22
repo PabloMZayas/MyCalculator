@@ -10,6 +10,7 @@ import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
     private var operation = ""
+    private  var falseOperation = ""
     var checkLast = 0
     private val viewModel: CalculatorViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
@@ -30,9 +31,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.calculate.observe(this){ operation ->
+            var operationFormat = operation.toString()
+            val decimalFormat = DecimalFormat("#,###.####")
+            //val roundOff = decimalFormat.format(operationFormat)
             if(operation.length>11)
                 binding.editTextShowOperation.textSize = 30f
-            binding.editTextShowOperation.setText(operation)
+            binding.editTextShowOperation.setText(operationFormat)
         }
     }
 
@@ -61,24 +65,15 @@ class MainActivity : AppCompatActivity() {
 
             btnPlus.setOnClickListener { callViewModelWithSymbol('+')}
 
-            btnMinus.setOnClickListener {
-                val lastIndex = operation.lastIndex
-                for ((index, value) in operation.withIndex()) {
-                    if (index == lastIndex && (!value.isDigit() || value == '.') && value!= '÷' && value != 'x'){
-                        operation = operation.substring(0, operation.length-1)
-                        checkLast = 1
-                        Toast.makeText(this@MainActivity, "checkLast = $checkLast", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                operation += "-"
-                viewModel.modifyOperation(operation)}
+            btnMinus.setOnClickListener { callViewModelWithSymbol('-')}
 
             btnMultiplication.setOnClickListener {callViewModelWithSymbol('x')}
 
             btnDivision.setOnClickListener {callViewModelWithSymbol('÷')}
 
 
-            btnPoint.setOnClickListener { operation += "."
+            btnPoint.setOnClickListener {
+                operation += "."
                 viewModel.modifyOperation(operation)}
 
             btnPercentage.setOnClickListener {
@@ -93,6 +88,7 @@ class MainActivity : AppCompatActivity() {
 
             btnErase.setOnClickListener {
                 val auxOperation: String
+                val auxOperation2: String
                 if (operation.isNotEmpty()) {
                     auxOperation = operation.subSequence(0, operation.lastIndex).toString()
                     operation = auxOperation
@@ -103,38 +99,48 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+
+                if (falseOperation.isNotEmpty()) {
+                    auxOperation2 = falseOperation.subSequence(0, falseOperation.lastIndex).toString()
+                    falseOperation = auxOperation2
+                    val lastIndex = falseOperation.lastIndex
+                    for ((index, value) in falseOperation.withIndex()) {
+                        if (index == lastIndex && (!value.isDigit() || value == '.')){
+                            falseOperation = falseOperation.substring(0, falseOperation.length-1)
+                        }
+                    }
+                }
                 viewModel.modifyOperation(operation)
-                viewModel.subOperate(operation, checkLast)
+                viewModel.subOperate(operation)
             }
 
             btnErase.setOnLongClickListener {
+                checkLast = 0
                 operation = ""
                 viewModel.modifyOperation(operation)
-                viewModel.subOperate(operation, checkLast)
+                viewModel.subOperate(operation)
                 return@setOnLongClickListener true
             }
 
             btnEqual.setOnClickListener {
                 operation = viewModel.setEquals()
-                viewModel.subOperate(operation, checkLast)
+                viewModel.subOperate(operation)
+                viewModel.modifyOperation(operation)
             }
 
             editTextShowOperation.setOnClickListener {
                 val position = editTextShowOperation.selectionEnd
                 Toast.makeText(this@MainActivity, "position: $position", Toast.LENGTH_SHORT).show()
             }
-
-            /*btnShrek.setOnClickListener {
-                val snack = Snackbar.make(it,"Finlandia!",Snackbar.LENGTH_LONG)
-                snack.show()
-            }*/
         }
     }
 
     private fun callViewModelWithSymbol(c: Char) {
+        //checkLast = 0
         val lastIndex = operation.lastIndex
         for ((index, value) in operation.withIndex()) {
             if (index == lastIndex && (!value.isDigit() || value == '.')){
+                //falseOperation = falseOperation.substring(0, falseOperation.length-1)
                 operation = operation.substring(0, operation.length-1)
             }
         }
@@ -143,10 +149,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun callViewModel(c: Char) {
+        //checkLast = 0
         operation+=c
-        viewModel.subOperate(operation, checkLast)
+        viewModel.subOperate(operation)
         viewModel.modifyOperation(operation)
     }
-
 }
 
